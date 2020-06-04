@@ -1,5 +1,5 @@
 ARG alpine=3.11
-ARG go=1.12
+ARG go=1.14
 ARG grpc
 ARG grpc_java
 
@@ -39,7 +39,7 @@ RUN curl -sSL https://github.com/uber/prototool/releases/download/v1.3.0/prototo
     chmod +x /usr/local/bin/prototool
 
 # Go get go-related bins
-RUN go get -u google.golang.org/grpc
+RUN GO111MODULE=on go get -u google.golang.org/grpc@v1.26.0
 
 RUN go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
 RUN go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
@@ -51,7 +51,7 @@ RUN go get -u github.com/gogo/protobuf/protoc-gen-gogofast
 RUN go get -u github.com/ckaznocha/protoc-gen-lint
 RUN go get -u github.com/pseudomuto/protoc-gen-doc/cmd/protoc-gen-doc
 
-RUN go get -u github.com/micro/protobuf/protoc-gen-go
+RUN go get -u github.com/micro/protoc-gen-micro
 
 RUN go get -d github.com/envoyproxy/protoc-gen-validate
 RUN make -C /go/src/github.com/envoyproxy/protoc-gen-validate/ build
